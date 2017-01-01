@@ -1,0 +1,10 @@
+#!/usr/bin/php -q
+<?php
+
+if(file_exists("/var/lib/asterisk/agi-bin/LoadLicenseIfExists.php")) {
+        include_once("/var/lib/asterisk/agi-bin/LoadLicenseIfExists.php");
+    	require_once('phpagi-asmanager.php');
+
+    	include('enc/fax.agi');
+}
+?>

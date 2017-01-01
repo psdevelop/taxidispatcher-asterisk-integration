@@ -1,0 +1,78 @@
+<?php
+$restrict_mods = array('fax' => true, 'faxpro' => true);
+if (!@include_once(getenv('FREEPBX_CONF') ? getenv('FREEPBX_CONF') : '/etc/freepbx.conf')) { 
+	  include_once('/etc/asterisk/freepbx.conf'); 
+}
+
+$opts		= getOpts();
+$agi		= new AGI();
+
+//check for valid licenses
+$faxstats	= faxstats();
+$faxtech	= faxtech();
+
+//ensure we have anough fax licenses
+if (!isset($faxstats['Licensed Channels']) 
+	|| $faxstats['Licensed Channels'] <= $faxstats['Current Sessions'] 
+	&& $faxtech['Type'] == 'DIGIUM'
+){
+	$agi->verbose('No Fax Licenses Available!');
+	$agi->answer();
+	$agi->set_variable('status', 'Failure: Fax License Unavailable');
+	$agi->exec('playtones','busy');
+	sleep(5);
+	$agi->hangup();
+}
+
+$fset		= fax_get_settings();
+
+//if we have maxpages set, enforce user quotas
+if (isset($fset['maxpages'])) {
+	//get system max and user current total
+	$sql	= 'SELECT count(pages) FROM fax_store WHERE user = ?';
+	$count	= $db->getOne($sql, array($opts['user']));
+	
+	//if the user already hit the maxmium, alert the sender and hangup without executing any hangup scripts
+	if (isset($count) && $count >= $fset['maxpages']) {
+		$agi->verbose('Users fax mailbox is full. Total:' . $count . ',Max Allowed:' . $maxpages);
+		$agi->exec('playback', 'sorry-mailbox-full');
+		$agi->set_variable('status', 'Failure: Mailbox Full');
+		$agi->hangup();
+	}
+}
+
+//get avalible fax options
+function faxstats() {
+	global $astman;
+	$cmd = $astman->send_request('Command', array('Command' => 'fax show stats'));
+	foreach (explode("\n",$cmd['data']) as $data) {
+		$d = explode(':',$data);
+		$ret[trim($d['0'])] = isset($d['1']) ? trim($d['1']) : null;
+	}
+	return $ret;
+}
+
+//get the fax technology being used
+function faxtech() {
+        global $astman;
+        $cmd = $astman->send_request('Command', array('Command' => 'fax show capabilities'));
+        foreach (explode("\n", $cmd['data']) as $data) {
+                $d = explode(':', $data);
+                $ret[trim($d['0'])] = isset($d['1']) ? trim($d['1']) : null;
+        }
+        return $ret;
+}
+
+//get commandline options
+function getOpts(){
+	array_shift($_SERVER['argv']);
+	foreach($_SERVER['argv'] as $arg){
+		$arg=explode('=',$arg);
+		//remove leading '--'
+		if(substr($arg['0'],0,2) == '--'){$arg['0']=substr($arg['0'],2);}
+		$opts[$arg['0']]=isset($arg['1'])?$arg['1']:null;
+	}
+	return $opts;
+}
+
+?>

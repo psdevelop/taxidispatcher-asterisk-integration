@@ -1,0 +1,51 @@
+#!/usr/bin/php -q
+<?php
+// vim: set ai ts=4 sw=4 ft=php:
+/**
+ * Class of Service handler
+ */
+
+// Load licences!
+$lic_file = '';
+$lic_dir  = '/etc/schmooze';
+$dir      = scandir($lic_dir);
+
+foreach ($dir as $f) {
+	if (substr($f, 0, 8) == 'license-' && substr($f, -3) == '.zl' && strlen($f) > 11) {
+		$lic_file = $lic_dir  . '/' . $f;
+		break;
+	}
+}
+
+if (file_exists($lic_file) && filesize($lic_file) > 100) {
+	$load_license = zend_loader_install_license($lic_file);
+}
+
+// We want a fast startup. So:
+//   No astman connection
+$bootstrap_settings['skip_astman'] = true;
+//   No auth
+$bootstrap_settings['freepbx_auth'] = false;
+// Bootstrap!
+include '/etc/freepbx.conf';
+
+// Finally, load the AGI class.
+include 'phpagi.php';
+
+// 2.11 
+if (!cos_islicenced()) {
+	return;
+}
+// Now we're good to go. So. Firstly, we should check if it's licenced.
+try {
+	$cos = Cos::create();
+} catch (Exception $e) {
+	// We should never have been called. We're not licenced. 
+	exit;
+}
+
+// We're licenced. Suh-wee-tah.
+$agi = new AGI();
+$agi->verbose('Starting Class Of Service checks', 1);
+$cos->checkCoS($agi);
+
