@@ -15,3 +15,6 @@ astlogdir => /var/log/asterisk
 astsbindir => /usr/sbin
 
 /var/lib/asterisk/sounds/
+
+
+!!!!!!!!!   https://wiki.asterisk.org/wiki/display/AST/Directory+and+File+Structure
