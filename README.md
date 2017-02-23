@@ -18,3 +18,9 @@ astsbindir => /usr/sbin
 
 
 !!!!!!!!!   https://wiki.asterisk.org/wiki/display/AST/Directory+and+File+Structure
+
+chmod 777 agi-play1.php
+
+cd /etc/asterisk/
+
+nano extensions_custom.conf
