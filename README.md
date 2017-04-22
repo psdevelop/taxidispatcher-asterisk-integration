@@ -24,3 +24,52 @@ chmod 777 agi-play1.php
 cd /etc/asterisk/
 
 nano extensions_custom.conf
+======================
+inbound sample
+
+trunk siplink49911
+
+username=001771-74991163772
+type=friend
+secret=b15b1c7f
+insecure=invite
+host=sip.siplink.pro
+fromuser=001771-74991163772
+fromdomain=sip.siplink.pro
+dtmfmode=rfc2833
+disallow=all
+defaultuser=001771-74991163772
+defaultexpiry=360
+context=from-trunk
+canreinvite=no
+allow=alaw
+
+001771-74991163772:b15b1c7f@sip.siplink.pro/001771-74991163772
+
+===================
+outbound sample
+
+trunk siplink988
+
+type=friend
+secret=8a6b8793
+insecure=invite
+host=sip.siplink.pro
+username=001771-79883138837
+fromuser=001771-79883138837
+fromdomain=sip.siplink.pro
+dtmfmode=rfc2833
+disallow=all
+defaultuser=001771-79883138837
+defaultexpiry=360
+context=from-trunk
+canreinvite=no
+allow=alaw
+
+001771-79883138837:8a6b8793@sip.siplink.pro/001771-79883138837
+=====================
+outbound route 
+dial pattern 
+null null XXXXXXXXXXX(match pattern) null
+
+
