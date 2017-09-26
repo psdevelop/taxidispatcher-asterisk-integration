@@ -72,4 +72,4 @@ outbound route
 dial pattern 
 null null XXXXXXXXXXX(match pattern) null
 
-
+AMI менеджера заводить через /etc/asterisk/manager.conf
