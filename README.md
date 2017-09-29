@@ -76,6 +76,8 @@ AMI менеджера заводить через /etc/asterisk/manager.conf
 
 wav to gsm convert
 
+rm v*.gsm
+
 sox -V hello.wav -r 8000 -c 1 -t ul hello.ulaw
 
 sox -V hello.wav -r 8000 -c 1 -t al hello.alaw
