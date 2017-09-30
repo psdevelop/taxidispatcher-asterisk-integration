@@ -111,3 +111,5 @@ sox -V v3snd28.wav -r 8000 -c 1 -t gsm v3snd28.gsm
 sox -V v3snd29.wav -r 8000 -c 1 -t gsm v3snd29.gsm
 sox -V v3snd30.wav -r 8000 -c 1 -t gsm v3snd30.gsm
 
+echo "This is the message body" | mutt -s "hello" -a /var/lib/asterisk/sounds/v3snd10.gsm -- psdevelop@yandex.ru
+
