@@ -86,4 +86,28 @@ sox -V hello.wav -r 8000 -c 1 -t gsm hello.gsm
 
 for a in *.wav; do sox "$a" -r 8000 -c 1 ${a/.wav/.gsm} resample -ql; done
 
+sox -V v1snd2.wav -r 8000 -c 1 -t gsm v1snd2.gsm
+sox -V v1snd3.wav -r 8000 -c 1 -t gsm v1snd3.gsm
+sox -V v1snd4.wav -r 8000 -c 1 -t gsm v1snd4.gsm
+sox -V v3snd10.wav -r 8000 -c 1 -t gsm v3snd10.gsm
+sox -V v3snd17.wav -r 8000 -c 1 -t gsm v3snd17.gsm
+sox -V v3snd11.wav -r 8000 -c 1 -t gsm v3snd11.gsm
+sox -V v3snd12.wav -r 8000 -c 1 -t gsm v3snd12.gsm
+sox -V v3snd13.wav -r 8000 -c 1 -t gsm v3snd13.gsm
+sox -V v3snd14.wav -r 8000 -c 1 -t gsm v3snd14.gsm
+sox -V v3snd15.wav -r 8000 -c 1 -t gsm v3snd15.gsm
+sox -V v3snd16.wav -r 8000 -c 1 -t gsm v3snd16.gsm
+sox -V v3snd18.wav -r 8000 -c 1 -t gsm v3snd18.gsm
+sox -V v3snd19.wav -r 8000 -c 1 -t gsm v3snd19.gsm
+sox -V v3snd20.wav -r 8000 -c 1 -t gsm v3snd20.gsm
+sox -V v3snd21.wav -r 8000 -c 1 -t gsm v3snd21.gsm
+sox -V v3snd22.wav -r 8000 -c 1 -t gsm v3snd22.gsm
+sox -V v3snd23.wav -r 8000 -c 1 -t gsm v3snd23.gsm
+sox -V v3snd24.wav -r 8000 -c 1 -t gsm v3snd24.gsm
+sox -V v3snd25.wav -r 8000 -c 1 -t gsm v3snd25.gsm
+sox -V v3snd26.wav -r 8000 -c 1 -t gsm v3snd26.gsm
+sox -V v3snd27.wav -r 8000 -c 1 -t gsm v3snd27.gsm
+sox -V v3snd28.wav -r 8000 -c 1 -t gsm v3snd28.gsm
+sox -V v3snd29.wav -r 8000 -c 1 -t gsm v3snd29.gsm
+sox -V v3snd30.wav -r 8000 -c 1 -t gsm v3snd30.gsm
 
