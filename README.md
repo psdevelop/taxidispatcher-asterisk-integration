@@ -72,4 +72,18 @@ outbound route
 dial pattern 
 null null XXXXXXXXXXX(match pattern) null
 
+AMI менеджера заводить через /etc/asterisk/manager.conf
+
+wav to gsm convert
+
+rm v*.gsm
+
+sox -V hello.wav -r 8000 -c 1 -t ul hello.ulaw
+
+sox -V hello.wav -r 8000 -c 1 -t al hello.alaw
+
+sox -V hello.wav -r 8000 -c 1 -t gsm hello.gsm
+
+for a in *.wav; do sox "$a" -r 8000 -c 1 ${a/.wav/.gsm} resample -ql; done
+
 
