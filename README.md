@@ -68,6 +68,14 @@ allow=alaw
 
 001771-79883138837:8a6b8793@sip.siplink.pro/001771-79883138837
 =====================
+SIPSAMSUNG
+
+host=192.168.0.200
+port=5060
+type=peer
+allow=alaw,ulaw
+disallow=all
+=====================
 outbound route 
 dial pattern 
 null null XXXXXXXXXXX(match pattern) null
