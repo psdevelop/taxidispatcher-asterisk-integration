@@ -125,3 +125,29 @@ sox -V v3snd30.wav -r 8000 -c 1 -t gsm v3snd30.gsm
 
 echo "This is the message body" | mutt -s "hello" -a /var/lib/asterisk/sounds/v3snd10.gsm -- psdevelop@yandex.ru
 
+настройка гоип 
+https://wiki.merionet.ru/ip-telephoniya/56/integraciya-goip-1-i-asterisk/
+
+OUTBOUND name 'SIP988'
+host=192.168.0.105
+port=5060
+secret=xxxxxxxxxxx
+type=peer
+context=from-internal
+dtmfmode=rfc2833
+insecure=very&port,invite
+qualify=yes
+defaultuser=ikshagoip
+nat=no
+disallow=all
+allow=alaw&ulaw
+canreinvite=no
+
+INBOUND name 'ikshagoip'
+type=friend
+host=dynamic
+secret=njutv64b568ybec
+context=from-trunk
+dtmfmode=rfc2833
+canreinvite=no
+qualify=yes
