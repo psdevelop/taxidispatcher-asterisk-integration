@@ -151,3 +151,14 @@ context=from-trunk
 dtmfmode=rfc2833
 canreinvite=no
 qualify=yes
+
+для робота
+[from-internal-custom]
+exten => 102,1,Answer
+exten => 102,n,AGI(agi-play1.php)
+exten => 102,n,Hangup
+для информатора
+[from-pstn-custom]
+exten => 102,1,Answer
+exten => 102,n,AGI(agi-play1.php)
+exten => 102,n,Hangup
