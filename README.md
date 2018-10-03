@@ -160,5 +160,5 @@ exten => 102,n,Hangup
 для информатора
 [from-pstn-custom]
 exten => 102,1,Answer
-exten => 102,n,AGI(agi-play1.php)
+exten => 102,n,AGI(agi-play2.php)
 exten => 102,n,Hangup
