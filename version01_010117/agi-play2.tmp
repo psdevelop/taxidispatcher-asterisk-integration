@@ -1,0 +1,26 @@
+#!/usr/bin/php -q
+<?php
+	
+	require_once "phpagi.php";
+
+    set_time_limit(30);
+    ob_implicit_flush(false);
+    error_reporting(0);
+
+    $agi = new AGI();
+    $agi->answer();
+    //$agi->text2wav('Goodbye');d
+    //$agi->stream_file('v1snd1');
+    $vr = $agi->get_variable('vids');
+
+    if(!($vr && isset($vr['result']) && $vr['result']!=0)) {
+        $agi->hangup();
+        exit(0);
+    }
+
+    $vids = explode(',', $vr['data']);
+    for($i = 0; $i < count($vids); $i++) {
+        $agi->stream_file('v' . $i . 'snd' . $vids[$i]);
+    }
+
+    $agi->hangup();
