@@ -1,0 +1,209 @@
+    1  sed -i 's/\(^SELINUX=\).*/\SELINUX=disabled/' /etc/sysconfig/selinux
+    2  sed -i 's/\(^SELINUX=\).*/\SELINUX=disabled/' /etc/selinux/config
+    3  reboot
+    4  yum -y groupinstall core base "Development Tools"
+    5  adduser asterisk -m -c "Asterisk User"
+    6  firewall-cmd --zone=public --add-port=80/tcp --permanent
+    7  yum -y install lynx tftp-server unixODBC mysql-connector-odbc mariadb-server mariadb   httpd ncurses-devel sendmail sendmail-cf sox newt-devel libxml2-devel libtiff-devel   audiofile-devel gtk2-devel subversion kernel-devel git crontabs cronie   cronie-anacron wget vim uuid-devel sqlite-devel net-tools gnutls-devel python-devel texinfo   libuuid-devel
+    8  rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    9  rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+   10  yum remove php*
+   11  yum install php56w php56w-pdo php56w-mysql php56w-mbstring php56w-pear php56w-process php56w-xml php56w-opcache php56w-ldap php56w-intl php56w-soap
+   12  curl -sL https://rpm.nodesource.com/setup_8.x | bash -
+   13  yum install -y nodejs
+   14  systemctl enable mariadb.service
+   15  systemctl start mariadb
+   16  mysql_secure_installation
+   17  systemctl enable httpd.service
+   18  systemctl start httpd.service
+   19  pear install Console_Getopt
+   20  cd /usr/src
+   21  wget http://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
+   22  wget http://downloads.asterisk.org/pub/telephony/libpri/libpri-current.tar.gz
+   23  wget -O jansson.tar.gz https://github.com/akheron/jansson/archive/v2.10.tar.gz
+   24  wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-16-current.tar.gz
+   25  wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-15-current.tar.gz
+   26  tar xvfz dahdi-linux-complete-current.tar.gz
+   27  tar xvfz libpri-current.tar.gz
+   28  rm -f dahdi-linux-complete-current.tar.gz libpri-current.tar.gz
+   29  cd dahdi-linux-complete-*
+   30  make all
+   31  yum install kernel-devel-$(uname -r)
+   32  yum update
+   33  yum install kernel-devel
+   34  yum update kernel
+   35  wget http://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-2.11.1+2.11.1.tar.gz
+   36  tar xvfz dahdi-linux-complete-2.11.1+2.11.1.tar.gz
+   37  cd ..
+   38  cd dahdi-linux-complete-2.11.1+*
+   39  cd dahdi-linux-complete-2.11.1*
+   40  cd dahdi-linux-complete-2*
+   41  cd dahdi-linux-complete-2.11.1+2.11.1
+   42  ls
+   43  wget http://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-2.11.1+2.11.1.tar.gz
+   44  cd dahdi-linux-complete-2.11.1+2.11.1
+   45  tar xvfz dahdi-linux-complete-2.11.1+2.11.1.tar.gz
+   46  cd dahdi-linux-complete-2.11.1+2.11.1
+   47  make all
+   48  cd ..
+   49  ls
+   50  cd kernels
+   51  ls
+   52  reboot
+   53  sestatus
+   54  yum -y update
+   55  uname -r
+   56  cd /usr/src
+   57  cd dahdi-linux-complete-2.11.1+2.11.1
+   58  make all
+   59  cd ..
+   60  ls
+   61  cd dahdi-linux-complete-3.0.0+3.0.0
+   62  make all
+   63  cd ..
+   64  cd dahdi-linux-complete-2.11.1+2.11.1
+   65  make install
+   66  make config
+   67  cd /usr/src/libpri-*
+   68  make
+   69  make install
+   70  cd ..
+   71  tar vxfz jansson.tar.gz
+   72  rm -f jansson.tar.gz
+   73  cd jansson-*
+   74  autoreconf -i
+   75  ./configure --libdir=/usr/lib64
+   76  make
+   77  make install
+   78  cd ..
+   79  ls
+   80  tar xvfz asterisk-16-current.tar.gz
+   81  cd asterisk-*
+   82  cd asterisk-16*
+   83  contrib/scripts/install_prereq install
+   84  ./configure --libdir=/usr/lib64 --with-pjproject-bundled
+   85  contrib/scripts/get_mp3_source.sh
+   86  make menuselect
+   87  ./configure
+   88  make menuselect
+   89  chmod 777 menuselect
+   90  make menuselect
+   91  cd menuselect
+   92  ./configure
+   93  cd ..
+   94  make menuselect
+   95  ./contrib/scripts/install_prereq install
+   96  ./configure
+   97  make menuselect
+   98  make ./menuselect
+   99  cd menuselect
+  100  make
+  101  cd ..
+  102  make menuselect
+  103  make menuselect.makeopts
+  104  ./contrib/scripts/install_prereq install
+  105  ./configure
+  106  make menuselect
+  107  ./configure --libdir=/usr/lib64 --without-dahdi --without-pri --without-gtk2     --without-radius --without-x11 --without-speex --with-pjproject-bundled
+  108  make menuselect
+  109  ./contrib/scripts/install_prereq install
+  110  make menuselect
+  111  yum -y install libsrtp
+  112  yum install make -y
+  113  contrib/scripts/install_prereq install
+  114  make menuselect
+  115  cd menuselect
+  116  ls
+  117  ./configure
+  118  cd ..
+  119  make menuselect
+  120  ls
+  121  make clean
+  122  ./configure
+  123  make menuselect
+  124  make clean
+  125  make menuselect
+  126  cd /usr/src
+  127  ls
+  128  cd asterisk-16.3.0
+  129  make clean
+  130  ./configure
+  131  make menuselect
+  132  cd .,
+  133  cd ..
+  134  ls
+  135  tar xvfz asterisk-15-current.tar.gz
+  136  cd asterisk-15.7.1
+  137  cd asterisk-15.7.2
+  138  contrib/scripts/install_prereq install
+  139  ./configure --libdir=/usr/lib64 --with-pjproject-bundled
+  140  contrib/scripts/get_mp3_source.sh
+  141  make menuselect
+  142  make
+  143  make install
+  144  make config
+  145  ldconfig
+  146  chkconfig asterisk off
+  147  chown asterisk. /var/run/asterisk
+  148  chown -R asterisk. /etc/asterisk
+  149  chown -R asterisk. /var/{lib,log,spool}/asterisk
+  150  chown -R asterisk. /usr/lib64/asterisk
+  151  chown -R asterisk. /var/www/
+  152  sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php.ini
+  153  sed -i 's/^\(User\|Group\).*/\1 asterisk/' /etc/httpd/conf/httpd.conf
+  154  sed -i 's/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
+  155  systemctl restart httpd.service
+  156  cd /usr/src
+  157  wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-14.0-latest.tgz
+  158  tar xfz freepbx-14.0-latest.tgz
+  159  rm -f freepbx-14.0-latest.tgz
+  160  cd freepbx
+  161  ./start_asterisk start
+  162  ./install -n
+  163  firewall-cmd --zone=public --add-port=80/tcp --permanent
+  firewall-cmd --zone=public --add-port=5038/tcp --permanent
+  firewall-cmd --zone=public --add-port=5060/tcp --permanent
+   firewall-cmd --reload
+   nano /etc/systemd/system/freepbx.service
+   [Unit]
+Description=FreePBX VoIP Server
+After=mariadb.service
+ 
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/fwconsole start -q
+ExecStop=/usr/sbin/fwconsole stop -q
+ 
+[Install]
+WantedBy=multi-user.target
+
+systemctl enable freepbx.service
+systemctl start freepbx
+systemctl status -l freepbx.service
+
+nano /etc/asterisk/manager.conf
+[radmin]
+secret = xxxxxx
+deny=0.0.0.0/0.0.0.0
+permit=176.119.156.138/255.255.255.0
+read = system,call,log,verbose,command,agent,user,config,command,dtmf,reporting,cdr,dialplan,originate,message,all
+write = system,call,log,verbose,command,agent,user,config,command,dtmf,reporting,cdr,dialplan,originate,message,all
+writetimeout = 2000
+
+cd /var/lib/asterisk/sounds/
+wget http://psdevelop.ru/asterisk/sounds.zip
+yum install unzip -y
+unzip sounds.zip
+
+cd /etc/asterisk
+mv extensions_custom.conf extentions_custom_.conf
+wget http://psdevelop.ru/asterisk/extensions_custom.conf
+
+cd /var/lib/asterisk/agi-bin
+wget http://psdevelop.ru/asterisk/agi-play1.tmp
+wget http://psdevelop.ru/asterisk/agi-play2.tmp
+mv agi-play1.tmp agi-play1.php
+mv agi-play2.tmp agi-play2.php
+chmod 777 agi-play1.php
+chmod 777 agi-play2.php

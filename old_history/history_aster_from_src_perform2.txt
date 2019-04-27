@@ -1,0 +1,221 @@
+﻿   14  yum install nano
+   15  nano /etc/sysconfig/selinux
+SELINUX=disabled
+   16  reboot
+yum install -y gcc gcc-c++ lynx bison mariadb-devel mariadb-server mariadb gmime-devel psmisc php php-mysql php-pear php-mbstring 
+yum install tftp-server httpd make ncurses-devel libtermcap-devel sendmail sendmail-cf caching-nameserver sox newt-devel libxml2-devel libtiff-devel audiofile-devel gtk2-devel subversion kernel-devel 
+yum install kernel-devel-$(uname -r) git subversion kernel-devel php-process crontabs cronie cronie-anacron wget vim php-xml uuid-devel libtool sqlite-devel libuuid-devel bzip2
+systemctl enable mariadb.service 
+systemctl status mariadb.service
+systemctl start mariadb.service
+pear uninstall db 
+pear install db-1.7.14
+17  cd /usr/src/
+   18  wget http://www.pjsip.org/release/2.4/pjproject-2.4.tar.bz2
+   19  tar -xjvf pjproject-2.4.tar.bz2
+   20  cd pjproject-2.4*
+
+   21  ./configure --prefix=/usr --enable-shared --disable-sound --disable-resample --disable-video --libdir=/usr/lib64
+   22  make dep
+   23  make
+   24  make install
+   25  cd ..
+   26  wget http://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
+   27  tar xvfz dahdi-linux-complete-current.tar.gz
+   28  cd dahdi-linux-complete-*
+   29  make all
+   30  You do not appear to have the sources for the 3.10.0-327.28.2.el7.x86_64 kernel installed.
+   31  yum install kernel-devel
+uname -r ==>>3.10.0-327.28.2.el7.x86_64
+yum install kernel-devel-3.10.0-327.28.2.el7.x86_64
+yum update
+yum install kernel-devel and yum update kernel - доводим ядро до актуального чтобы компилить dahdi-linux-complete-* make all
+   32  cd ..
+   33  cd rernels
+   34  cd kernels
+   35  ls
+   wget http://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-2.11.1+2.11.1.tar.gz
+   36  ln -s /usr/src/kernels/3.10.0-693.5.2.el7.x86_64 /usr/src/dahdi-linux-complete-2.11.1+2.11.1/build
+   37  cd ..
+   46  yum -y install epel-release
+   54  cd /usr/src/
+   55  ls
+   56  cd dahdi-linux-complete-*
+   57  make all
+   58  make install
+   59  make config
+   40  reboot
+   60  cd ..
+   64  cd ..
+   65  wget https://downloads.sourceforge.net/project/lame/lame/3.98.4/lame-3.98.4.tar.gz
+ wget http://download.openpkg.org/components/cache/lame/lame-3.98.4.tar.gz
+   66  tar zxvf lame-3.98.4.tar.gz
+   67  cd lame-3.98.4
+   68  ./configure
+   69  make
+   70  make install
+   71  cd ..
+   72  wget http://www.digip.org/jansson/releases/jansson-2.5.tar.gz
+   73  tar zvxf jansson-2.5.tar.gz
+   74  cd jansson-2.5
+   75  ./configure --prefix=/usr
+   76  make clean
+   77  make
+   78  make install
+   79  ldconfig
+   80  cd ..
+   81  wget http://downloads.asterisk.org/pub/telephony/libpri/libpri-1.6.0.tar.gz
+   82  tar xvfz libpri-1.6.0.tar.gz
+   83  cd libpri-1.6.0
+   84  make
+   85  make install
+   86  cd ..
+   87  wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-14-current.tar.gz
+   88  tar xvfz asterisk-14-current.tar.gz
+   89  cd asterisk-14*
+   90  ./configure --libdir=/usr/lib64
+   91  contrib/scripts/get_mp3_source.sh
+   92  make menuselect
+   93  make
+   94  make install
+   95  make samples
+   96  make config
+   97  useradd -m asterisk
+  100  useradd -m asterisk
+  101  chown asterisk.asterisk /var/run/asterisk
+  102  chown -R asterisk.asterisk /etc/asterisk
+  103  chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk
+  104  chown -R asterisk.asterisk /usr/lib64/asterisk
+  105  systemctl restart asterisk
+  106  mysql -u root –p
+  create user 'asterisk'@'localhost' identified by 'asterisk';
+  create database asterisk; 
+  create database asteriskcdrdb;
+  GRANT ALL PRIVILEGES ON asterisk.* TO asterisk@localhost IDENTIFIED BY 'asterisk'; 
+  GRANT ALL PRIVILEGES ON asteriskcdrdb.* TO asterisk@localhost IDENTIFIED BY 'asterisk'; 
+  flush privileges;
+  107  mysql -u root
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd –-reload
+mysql_secure_installation
+  108  chown -R asterisk.asterisk /var/www/
+  109  sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php.ini
+  110  sed -i 's/^\(User\|Group\).*/\1 asterisk/' /etc/httpd/conf/httpd.conf
+  111  sed -i 's/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
+  112  systemctl enable httpd
+  113  systemctl start httpd
+  114  cd ..
+  115  wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-13.0-latest.tgz
+  116  tar xfz freepbx-13.0-latest.tgz
+  117  ls
+  118  cd freepbx
+  119  ./start_asterisk start
+  120  ./install -n
+  121  nano /etc/sysconfig/selinux
+  122  su - asterisk
+  123  nano /etc/sysconfig/selinux
+  124  nano /etc/selinux/config
+  125  cd /usr/src/
+  126  ls
+  127  cd fre*
+  128  ./start_asterisk start
+  129  ./install -n
+  130  Reading /etc/asterisk/asterisk.conf...Error!
+  131  Unable to read /etc/asterisk/asterisk.conf or it was missing a directories section
+  132  nano /etc/asterisk/asterisk.conf 
+  133  ./install -n
+  134  nano /etc/asterisk/asterisk.conf 
+  135  /usr/bin/mysql_secure_installation
+  136  ./install
+  137  nano /etc/asterisk/asterisk.conf 
+  138  ./install -n
+  139  ./start_asterisk start
+  140  ./install -n
+  141  .Error!
+  142  Error communicating with Asterisk.  Ensure that Asterisk is properly installed and running as the asterisk user
+  143  ./install
+  144  reboot
+  145  firewall-cmd --zone=public --add-port=80/tcp --permanent
+  148  service asterisk start
+  151  cd /usr/src
+  152  ls
+  153  cd freepbx
+  154  ./start_asterisk start
+  155  ./install –n
+  156  ./install
+  157  Error!
+  158  Error communicating with Asterisk.  Ensure that Asterisk is properly installed and running as the asterisk user
+  159  Asterisk appears to be running as root
+  160  Try starting Asterisk with the './start_asterisk start' command in this directory
+  220  cd /usr/src/
+  221  cd freepbx
+  222  ./install -n
+  223  nano /etc/amportal.conf
+  !!!!!!!!! создаем пользователя для фрипбх
+  nano /etc/asterisk/manager.conf
+  secret = ee89247600290dee3b01b47a2debf8ec
+deny=0.0.0.0/0.0.0.0
+permit=127.0.0.1/255.255.255.0
+read = system,call,log,verbose,command,agent,user,config,command,dtmf,$
+write = system,call,log,verbose,command,agent,user,config,command,dtmf$
+writetimeout = 5000
+service asterisk stop - стопим
+cd /usr/src/freepbx/
+./start_asterisk start - запускаем именно так
+./install
+  224  service asterisk restart
+  225  asterisk -rvvv
+  226  service asterisk restart
+  227  fwconsole ma install sipsettings
+  следующее делает при необходимости если веб морда на этот файл ругается
+  228  nano /var/www/html/admin/libraries/BMO/Self_Helper.class.php
+  229  service asterisk restart
+  230  nano /etc/asterisk/manager.conf
+  231  cd /var/lib/asterisk/sounds/
+  232  ls
+  233  wget http://psdevelop.ru/asterisk/sounds.zip
+  234  ls
+  235  unzip sounds.zip
+  236  yum install unzip
+  237  unzip sounds.zip
+  238  ls
+  239  cd /etc/asterisk
+  240  ls
+  241  mv extensions_custom.conf extentions_custom_.conf
+  242  ls
+  243  wget http://psdevelop.ru/asterisk/extensions_custom.conf
+  244  ls
+  245  nano extensions_custom.conf
+  246  nano manager.conf 966db01869979775ff21cce25ff860bc
+ [admin]
+secret = ee89247600290dee3b01b47a2debf8ec
+deny=0.0.0.0/0.0.0.0
+permit=127.0.0.1/255.255.255.0
+read = system,call,log,verbose,command,agent,user,config,command,dtmf,reporting,cdr,dialplan,originate,message
+write = system,call,log,verbose,command,agent,user,config,command,dtmf,reporting,cdr,dialplan,originate,message
+writetimeout = 5000
+
+[radmin]
+secret = radm111
+deny=0.0.0.0/0.0.0.0
+permit=192.168.0.90/255.255.255.0
+read = system,call,log,verbose,command,agent,user,config,command,dtmf,reporting,cdr,dialplan,originate,message,all
+write = system,call,log,verbose,command,agent,user,config,command,dtmf,reporting,cdr,dialplan,originate,message,all
+writetimeout = 2000
+
+  247  cd /var/lib/asterisk/agi-bin
+  248  ls
+  249  wget http://psdevelop.ru/asterisk/agi-play1.tmp
+  wget http://psdevelop.ru/asterisk/agi-play2.tmp
+  250  ls
+  251  mv agi-play1.tmp agi-play1.php
+  mv agi-play2.tmp agi-play2.php
+  252  ls
+  253  chmod 777 agi-play1.php
+  chmod 777 agi-play2.php
+  254  ls
+  255  reboot
+  256  history > history_aster_from_src.txt
+  echo "This is the message body" | mutt -s "hello" -a history_aster_from_src.txt -- psdevelop@yandex.ru
+
+

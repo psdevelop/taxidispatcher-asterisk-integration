@@ -1,0 +1,197 @@
+    1  yum install nano
+    2  nano /etc/sysconfig/selinux
+    3  reboot
+    4  yum install wget
+    5  cd /usr/src/
+    6  wget http://www.pjsip.org/release/2.4/pjproject-2.4.tar.bz2
+    7  tar -xjvf pjproject-2.4.tar.bz2
+    8  ls
+    9  tar -xjvf pjproject-2.4.tar.bz2
+   10  yum install bzip2
+   11  tar -xjvf pjproject-2.4.tar.bz2
+   12  ls
+   13  cd pjproject-2.4*
+   14  ./configure --prefix=/usr --enable-shared --disable-sound --disable-resample --disable-video --libdir=/usr/lib64
+   15  yum install -y gcc gcc-c++ lynx bison mariadb-devel mariadb-server mariadb gmime-devel psmisc php php-mysql php-pear php-mbstring 
+   16  yum install tftp-server httpd make ncurses-devel libtermcap-devel sendmail sendmail-cf caching-nameserver sox newt-devel libxml2-devel libtiff-devel audiofile-devel gtk2-devel subversion kernel-devel
+   17  yum install kernel-devel-$(uname -r) git subversion kernel-devel php-process crontabs cronie cronie-anacron vim php-xml uuid-devel libtool sqlite-devel libuuid-devel
+   18  systemctl enable mariadb.service
+   19  systemctl start mariadb.service
+   20  pear uninstall db
+   21  pear install db-1.7.14
+   22  ./configure --prefix=/usr --enable-shared --disable-sound --disable-resample --disable-video --libdir=/usr/lib64
+   23  make dep
+   24  make
+   25  make install
+   26  cd ..
+   27  wget http://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
+   28  tar xvfz dahdi-linux-complete-current.tar.gz
+   29  ls
+   30  cd dahdi-linux-complete-*
+   31  make all
+   32  yum install kernel-devel
+   33  cd ..
+   34  ls
+   35  cd kernels
+   36  ls
+   37  ln -s /usr/src/kernels/3.10.0-693.17.1.el7.x86_64 /usr/src/dahdi-linux-complete-2.11.1+2.11.1/build
+   38  cd ..
+   39  cd dahdi-linux-complete-*
+   40  make all
+   41  cd ..
+   42  cd kernels
+   43  ls
+   44  uname -r
+   45  yum install kernel-devel-3.10.0-327.28.2.el7.x86_64
+   46  ls
+   47  yum install "kernel-devel-uname-r == $(uname -r)"
+   48  rpm -Uvh http://mirror.pnl.gov/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+   49  yum update
+   50  yum install kernel-devel-3.10.0-327.28.2.el7.x86_64
+   51  yum -y update
+   52  reboot
+   53  yum install kernel-devel-3.10.0-327.28.2.el7.x86_64
+   54  yum install kernel-devel
+   55  cd /usr/src/
+   56  ls
+   57  cd kernels
+   58  ls
+   59  yum update kernel
+   60  uname -r
+   61  cd ..
+   62  cd dahdi-linux-complete-*
+   63  make all
+   64  yum -y install epel-release
+   65  make install
+   66  make config
+   67  cd ..
+   68  wget https://downloads.sourceforge.net/project/lame/lame/3.98.4/lame-3.98.4.tar.gz
+   69  св .гык.ыкс.
+   70  cd /usr/src/
+   71  ls
+   72  wget http://download.openpkg.org/components/cache/lame/lame-3.98.4.tar.gz
+   73  ls
+   74  tar zxvf lame-3.98.4.tar.gz
+   75  cd lame-3.98.4
+   76  ./configure
+   77  make
+   78  make install
+   79  cd ..
+   80  wget http://www.digip.org/jansson/releases/jansson-2.5.tar.gz
+   81  tar zvxf jansson-2.5.tar.gz
+   82  cd jansson-2.5
+   83  ./configure --prefix=/usr
+   84  make clean
+   85  make
+   86  make install
+   87  ldconfig
+   88  cd ..
+   89  wget http://downloads.asterisk.org/pub/telephony/libpri/libpri-1.6.0.tar.gz
+   90  tar xvfz libpri-1.6.0.tar.gz
+   91  cd libpri-1.6.0
+   92  make
+   93  make install
+   94  cd ..
+   95  wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-14-current.tar.gz
+   
+   96  tar xvfz asterisk-14-current.tar.gz
+   97  cd asterisk-14*
+   98  ./configure --libdir=/usr/lib64
+   99  contrib/scripts/get_mp3_source.sh
+  100  make menuselect
+  101  make
+  102  make install
+  103  make samples
+  104  make config
+  105  useradd -m asterisk
+  106  chown asterisk.asterisk /var/run/asterisk
+  107  chown -R asterisk.asterisk /etc/asterisk
+  108  chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk
+  109  chown -R asterisk.asterisk /usr/lib64/asterisk
+  110  systemctl restart asterisk
+  111  mysql -u root –p
+  112  mysql -u root
+  113  firewall-cmd --zone=public --add-port=80/tcp --permanent
+  114  mysql_secure_installation
+  115  chown -R asterisk.asterisk /var/www/
+  116  sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php.ini
+  117  sed -i 's/^\(User\|Group\).*/\1 asterisk/' /etc/httpd/conf/httpd.conf
+  118  sed -i 's/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
+  119  systemctl enable httpd
+  120  systemctl start httpd
+  121  wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-13.0-latest.tgz
+  122  cd ..
+  123  wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-13.0-latest.tgz
+  124  tar xfz freepbx-13.0-latest.tgz
+  125  ls
+  126  cd freepbx
+  127  cd /usr/src
+  128  cd freepbx
+  129  ./start_asterisk start
+  130  Источник: http://wiki.merionet.ru/ip-telephoniya/33/ustanovka-freepbx-13-na-centos-7/
+  131  © ИТ База знаний - wiki.merionet.ru./start_asterisk start
+  132  Источник: http://wiki.merionet.ru/ip-telephoniya/33/ustanovka-freepbx-13-na-centos-7/
+  133  © ИТ База знаний - wiki.merionet.ru./start_asterisk start
+  134  Источник: http://wiki.merionet.ru/ip-telephoniya/33/ustanovka-freepbx-13-na-centos-7/
+  135  © ИТ База знаний - wiki.merionet.ru
+  136  ./start_asterisk start
+  137  ./install –n
+  138  Источник: http://wiki.merionet.ru/ip-telephoniya/33/ustanovka-freepbx-13-na-centos-7/
+  139  © ИТ База знаний - wiki.merionet.ru
+  140  ./install –n
+  141  ./install
+  142  nano /etc/asterisk/asterisk.conf
+  143  ./install –n
+  144  ./install
+  145  ps -ALf | grep asterisk
+  146  service asterisk stop
+  147  sudo -u asterisk service asterisk start
+  148  0KtXa20F
+  149  sudo -u asterisk service asterisk start
+  150  cd /usr/src
+  151  cd freepbx
+  152  ./install
+  153  nano /etc/amportal.conf
+  154  nano /etc/init.d/asterisk
+  155  nano /etc/asterisk/asterisk.conf
+  156  nano /etc/asterisk/manager.conf
+  157  service asterisk restart
+  158  ./install
+  159  nano /etc/asterisk/manager.conf
+  160  service asterisk restart
+  161  ./install
+  162  nano /etc/amportal.conf
+  163  service asterisk status
+  164  sudo -u asterisk service asterisk start
+  165  cd /usr/src/freepbx/
+  166  service asterisk status
+  167  reboot
+  168  cd /usr/src/freepbx/
+  169  ./install
+  170  ./start_asterisk start
+  171  service asterisk stop
+  172  ./start_asterisk start
+  173  ./install
+  174  ping ya.ru
+  175  ping sip.siplink.pro
+  176  nano /etc/asterisk/manager.conf
+  177  cd /var/lib/asterisk/sounds/
+  178  ды
+  179  ls
+  180  wget http://psdevelop.ru/asterisk/sounds.zip
+  181  yum install unzip
+  182  unzip sounds.zip
+  183  cd /etc/asterisk
+  184  mv extensions_custom.conf extentions_custom_.conf
+  185  wget http://psdevelop.ru/asterisk/extensions_custom.conf
+  186  nano extensions_custom.conf
+  187  cd /var/lib/asterisk/agi-bin
+  188  wget http://psdevelop.ru/asterisk/agi-play1.tmp
+  189  mv agi-play1.tmp agi-play1.php
+  190  chmod 777 agi-play1.php
+  191  nano agi-play1.php
+  192  history > history_aster_from_src.txt
+  193  yum install mutt
+  194  echo "This is the message body" | mutt -s "hello" -a history_aster_from_src.txt -- psdevelop@yandex.ru
+  195  ls
+  196  history > history_aster_from_src4.txt

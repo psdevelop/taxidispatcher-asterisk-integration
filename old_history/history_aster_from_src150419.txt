@@ -1,0 +1,211 @@
+    1  yum install nano
+    2  nano /etc/sysconfig/selinux
+    3  reboot
+    4  uname -r
+    5  cd /usr/src/kernels
+    6  ls
+    7  yum update kernel
+    8  uname -r
+    9  ls
+   10  yum install -y gcc gcc-c++ lynx bison mariadb-devel mariadb-server mariadb gmime-devel psmisc php php-mysql php-pear php-mbstring wget bzip2
+   11  yum install tftp-server httpd make ncurses-devel libtermcap-devel sendmail sendmail-cf caching-nameserver sox newt-devel libxml2-devel libtiff-devel audiofile-devel gtk2-devel subversion kernel-devel
+   12  yum install kernel-devel-$(uname -r) git subversion kernel-devel php-process crontabs cronie cronie-anacron vim php-xml uuid-devel libtool sqlite-devel libuuid-devel
+   13  uname -r
+   14  ls
+   15  uname -r
+   16  cd /usr/src/kernels
+   17  ls
+   18  cd /usr/src/kernels
+   19  ls
+   20  uname -r
+   21  yum update kernel
+   22  yum install kernel-devel
+   23  uname -r
+   24  yum -y update
+   25  reboot
+   26  uname -r
+   27  cd /usr/src/kernels
+   28  ls
+   29  cd /usr/src/
+   30  wget http://www.pjsip.org/release/2.4/pjproject-2.4.tar.bz2
+   31  tar -xjvf pjproject-2.4.tar.bz2
+   32  cd pjproject-2.4*
+   33  ./configure --prefix=/usr --enable-shared --disable-sound --disable-resample --disable-video --libdir=/usr/lib64
+   34  make dep
+   35  make
+   36  make install
+   37  systemctl enable mariadb.service
+   38  systemctl start mariadb.service
+   39  pear uninstall db
+   40  pear install db-1.7.14
+   41  cd ..
+   42  wget http://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
+   43  tar xvfz dahdi-linux-complete-current.tar.gz
+   44  cd dahdi-linux-complete-*
+   45  yum -y install epel-release
+   46  make all
+   47  make install
+   48  make config
+   49  cd ..
+   50  wget http://download.openpkg.org/components/cache/lame/lame-3.98.4.tar.gz
+   51  wget https://downloads.sourceforge.net/project/lame/lame/3.98.4/lame-3.98.4.tar.gz
+   52  tar zxvf lame-3.98.4.tar.gz
+   53  cd lame-3.98.4
+   54  ./configure
+   55  make
+   56  make install
+   57  cd ..
+   58  wget http://www.digip.org/jansson/releases/jansson-2.5.tar.gz
+   59  tar zvxf jansson-2.5.tar.gz
+   60  cd jansson-2.5
+   61  ./configure --prefix=/usr
+   62  make clean
+   63  make
+   64  make install
+   65  ldconfig
+   66  cd ..
+   67  wget http://downloads.asterisk.org/pub/telephony/libpri/libpri-1.6.0.tar.gz
+   68  tar xvfz libpri-1.6.0.tar.gz
+   69  cd libpri-1.6.0
+   70  make
+   71  make install
+   72  cd ..
+   73  wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-14-current.tar.gz
+   wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-15.7.2.tar.gz
+   74  tar xvfz asterisk-14-current.tar.gz
+   tar xvfz asterisk-15.7.2.tar.gz
+   75  cd asterisk-14*
+   cd asterisk-15*
+   76  ./configure --libdir=/usr/lib64
+   77  contrib/scripts/get_mp3_source.sh
+   78  make menuselect
+   79  make
+   80  make install
+   81  make samples
+   82  make config
+   83  useradd -m asterisk
+   84  chown asterisk.asterisk /var/run/asterisk
+   85  chown -R asterisk.asterisk /etc/asterisk
+   86  chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk
+   87  chown -R asterisk.asterisk /usr/lib64/asterisk
+   88  systemctl restart asterisk
+   89  mysql -u root –p
+   90  mysql -u root
+   91  firewall-cmd --zone=public --add-port=80/tcp --permanent
+   92  mysql_secure_installation
+   93  chown -R asterisk.asterisk /var/www/
+   94  sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php.ini
+   95  sed -i 's/^\(User\|Group\).*/\1 asterisk/' /etc/httpd/conf/httpd.conf
+   96  sed -i 's/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
+   97  systemctl enable httpd
+   98  systemctl start httpd
+   99  cd /usr/src/
+  100  wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-13.0-latest.tgz
+  101  tar xfz freepbx-13.0-latest.tgz
+  102  cd freepbx
+  103  nano /etc/asterisk/asterisk.conf
+  104  nano /etc/amportal.conf
+  105  nano /etc/init.d/asterisk
+  106  nano /etc/asterisk/asterisk.conf
+  systemctl stop firewalld
+  107  ./install
+  108  nano /etc/amportal.conf
+  109  nano /etc/asterisk/manager.conf
+  110  ./install
+  111  ./start_asterisk start
+  112  ./install
+  113  service asterisk stop
+  114  ./start_asterisk start
+  115  ./install
+  116  ./install -n
+  117  nano /etc/asterisk/manager.conf
+  118  cd /var/lib/asterisk/sounds/
+  119  wget http://psdevelop.ru/asterisk/sounds.zip
+  120  yum install unzip
+  121  unzip sounds.zip
+  122  cd /etc/asterisk
+  123  mv extensions_custom.conf extentions_custom_.conf
+  124  wget http://psdevelop.ru/asterisk/extensions_custom.conf
+  125  nano extensions_custom.conf
+  126  cd /var/lib/asterisk/agi-bin
+  127  wget http://psdevelop.ru/asterisk/agi-play1.tmp
+  128  mv agi-play1.tmp agi-play1.php
+  129  chmod 777 agi-play1.php
+  130  nano agi-play1.php
+  131  service asterisk stop
+  132  ./start_asterisk start
+  133  cd /usr/src/
+  134  ды
+  135  ls
+  136  cd free*
+  137  ./start_asterisk start
+  138  reboot
+  139  du -sh *
+  140  cd /
+  141  du -sh *
+  142  cd var
+  143  du -sh *
+  144  cd log
+  145  du -sh *
+  146  cd asterisk
+  147  du -sh *
+  148  rm full.0
+  149  service asterisk stop
+  150  cd /usr/src/
+  151  cd free*
+  152  ./start_asterisk start
+  153  nano /etc/asterisk/manager.conf
+  154  service asterisk stop
+  155  ./start_asterisk start
+  156  reboot
+  157  cd /usr/src/
+  158  cd free*
+  159  service asterisk stop
+  160  ./start_asterisk start
+  161  cd /var/lib/asterisk/agi-bin
+  162  ls
+  163  sudo
+  164  sudo service apache2
+  165  sudo service apache2 start
+  166  sudo service apache2 restart
+  167  serviceservi
+  168  service
+  169  service httpdicse
+  170  service httpd start
+  171  service httpd restart
+  172  systemcli
+  173  system status httpd.service
+  174  systemcli status httpd.service
+  175  sudo
+  176  sudo /etc/init.d/apache2 start
+  177  status
+  178  status httpd.service
+  179  nginx -t
+  180  apachemcli
+  181  systemcli reload httpd
+  182  help
+  183  reboot
+  184  help system
+  185  help systemcli
+  186  systemcli
+  187  start httpd
+  188  service
+  189  service status
+  190  service status all
+  191  service start httpd
+  192  service httpd start
+  193  service apache
+  194  service apache start
+  195  service httpd start
+  196  service httpd restart
+  197  service asterisk
+  198  service asterisk start
+  199  service asterisk stop
+  200  cd
+  201  cd /usr/scr/
+  202  ./start_asterisk start
+  203  dir
+  204  vi
+  205  service asterisk start
+  206  history > history_aster_from_src.txt
+ 
