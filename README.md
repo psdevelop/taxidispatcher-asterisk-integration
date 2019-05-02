@@ -143,6 +143,22 @@ disallow=all
 allow=alaw&ulaw
 canreinvite=no
 
+outbound route
+
+Имя
+Исходящий Caller ID
+Атрибуты
+Действие
+---------
+ALL_OUT	
++79000000000
+
+way to trunk SIP988
+------
+dial patterns 
+null null XXXXXXXXXXX(match pattern 8 900 000 00 00) null
+null null XXXXXXXXXXXX(match pattern +7 900 000 00 00) null
+
 INBOUND name 'mygoip'
 type=friend
 host=dynamic
@@ -151,6 +167,18 @@ context=from-trunk
 dtmfmode=rfc2833
 canreinvite=no
 qualify=yes
+
+inbound route
+DID
+CID
+Описание
+Назначение
+Действие
+-------------
+Any	
+Any	
+ALL_IN	
+Extensions: 100 SIP100 или на группу номеров
 
 для робота
 [from-internal-custom]
