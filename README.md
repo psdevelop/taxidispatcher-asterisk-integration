@@ -190,3 +190,5 @@ exten => 102,n,Hangup
 exten => 102,1,Answer
 exten => 102,n,AGI(agi-play2.php)
 exten => 102,n,Hangup
+
+![](images/Screenshot_4.png)
