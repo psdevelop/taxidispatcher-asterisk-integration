@@ -143,10 +143,10 @@ disallow=all
 allow=alaw&ulaw
 canreinvite=no
 
-INBOUND name 'ikshagoip'
+INBOUND name 'mygoip'
 type=friend
 host=dynamic
-secret=njutv64b568ybec
+secret=xxxxxxxxxxx
 context=from-trunk
 dtmfmode=rfc2833
 canreinvite=no
