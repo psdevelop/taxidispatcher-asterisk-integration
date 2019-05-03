@@ -20,7 +20,7 @@
 
     $vids = explode(',', $vr['data']);
     for($i = 0; $i < count($vids); $i++) {
-        $agi->stream_file('v' . $i . 'snd' . $vids[$i]);
+        $agi->stream_file('v' . ($i + 1) . 'snd' . $vids[$i]);
     }
 
     $agi->hangup();
