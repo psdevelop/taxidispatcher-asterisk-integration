@@ -192,3 +192,13 @@ exten => 102,n,AGI(agi-play2.php)
 exten => 102,n,Hangup
 
 ![](images/Screenshot_4.png)
+![](images/Screenshot_5.png)
+![](images/Screenshot_1.png)
+![](images/Screenshot_2.png)
+![](images/Screenshot_3.png)
+![](images/Screenshot_6.png)
+![](images/Screenshot_7.png)
+![](images/Screenshot_8.png)
+![](images/Screenshot_9.png)
+![](images/Screenshot_10.png)
+![](images/Screenshot_11.png)
