@@ -197,7 +197,7 @@ exten => 102,n,Hangup
 ![](images/Screenshot_2.png)
 ![](images/Screenshot_3.png)
 ![](images/Screenshot_6.png)
-![](images/Screenshot_7.png)
+![](images/Screenshot_7_2.png)
 ![](images/Screenshot_8.png)
 ![](images/Screenshot_9.png)
 ![](images/Screenshot_10.png)
