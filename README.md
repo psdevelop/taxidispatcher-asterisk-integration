@@ -84,6 +84,8 @@ outbound route
 dial pattern 
 null null XXXXXXXXXXX(match pattern) null
 
+https://s.mail.ru/4UVX/xXHNBBvP1
+
 AMI менеджера заводить через /etc/asterisk/manager.conf
 
 wav to gsm convert
